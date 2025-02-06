@@ -1,0 +1,7 @@
+:root{
+    --font-family: "Red Hat Text", serif;
+    --product-font-size: 16px;
+    --btn-bg:hsl(14, 86%, 42%);
+    --product-border:hsl(14, 86%, 42%);
+    --confirmed-order: hsl(159, 69%, 38%);
+}
