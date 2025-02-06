@@ -2,24 +2,25 @@
     --font-family: "Red Hat Text", serif;
     --product-font-size: 16px;
     --active-btn-bg:hsl(14, 86%, 42%);
-    --btn-bg:#FCFEFB;
-    --btn-color:#9B9897;
+    --btn-bg:#FFFFFD;
+    --btn-color:hsl(20, 17.60%, 3.30%);
     --btn-border:#736C6D;
     --product-border:hsl(14, 86%, 42%);
     --confirmed-order: hsl(159, 69%, 38%);
     --body-bg: #FCF8F5;
-    --heading-color:hsl(14, 65%, 9%)
+    --heading-color:hsl(14, 65%, 9%); 
+    --category-color:hsl(7, 20%, 60%);
 }
 
 body{
-    background-color: cadetblue;
+    background-color: var(--body-bg);
 }
 
 .container{
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
-    background-color: chocolate;
+    padding: 15px;
 }
 
 
@@ -34,6 +35,7 @@ body{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
+    /* margin: 0 auto; */
 }
 
 
@@ -44,10 +46,53 @@ body{
     position: relative;
 }
 
+.prouct-img{
+    display: flex;
+    
+}
 .product img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    border-radius: 15px;
+}
 
+.product-render .product button{
+    width: 60%;
+    margin: 0 auto;
+    padding: 11px 18px;
+    border-radius: 19px;
+    font-weight: 600;
+    font-size: 15px;
+    border: 2px solid var(--btn-border);
+    position: absolute;
+    bottom: 99px;
+    left: 49px;
+    background-color: var(--btn-bg);
+    color: var(--btn-color);
+}
+
+.product-render .product button i{
+    color: var(--active-btn-bg);
+    font-size: 16px;
+    padding-right: 8px;
+}
+
+.product .catergory {
+    margin-top: 30px;
+    color: var(--category-color); 
+    font-weight: 600;
+    font-size: 15px;/* adjust this value as needed */
+}
+
+.product-name{
+    color: var(--heading-color);
+    margin: 12px 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.price{
+    margin: 0 0 12px 0;
 }
