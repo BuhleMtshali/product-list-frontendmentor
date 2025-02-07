@@ -12,20 +12,20 @@
 </head>
 <body>
 <div class="container">
-<div class="product-container">
-<h1>Desserts</h1>
-<!-- //////////////// -->
-<div class="product-render">
-    <div class="product">
-        <img src="images/image-brownie-desktop.jpg" alt="brownie image">
-        <button class="addBtn">
-        <i class="fa-solid fa-cart-plus"></i>
-        Add to Cart
-        </button>
-        <small class="catergory">Brownie</small>
-        <p class="product-name">Salted Caramel Brownie</p>
-        <p class="price">$5.50</p>
-    </div>
+    <div class="product-container">
+        <h1>Desserts</h1>
+    <!-- //////////////// -->
+    <div class="product-render">
+        <div class="product">
+            <img src="images/image-brownie-desktop.jpg" alt="brownie image">
+            <button class="addBtn">
+            <i class="fa-solid fa-cart-plus"></i>
+            Add to Cart
+            </button>
+            <small class="catergory">Brownie</small>
+            <p class="product-name">Salted Caramel Brownie</p>
+            <p class="price">$5.50</p>
+        </div>
     <!-- ↑↑↑END OF PRODUCT -->
     <div class="product">
         <img src="images/image-brownie-desktop.jpg" alt="brownie image">
@@ -64,7 +64,13 @@
 <!-- ↑ END OF PRODUCT RENDER -->
 </div>
 <!-- ↑↑END OF PRODUCT CART↑↑ -->
-<div class="cart-container"></div>
+<div class="cart-container">
+    <h1>Your Cart (<span id="items-cart">0</span>)</h1>
+    <div class="cart-render">
+        <img src="images/empty-cart-bg.svg" alt="placeholder im">
+    </div>
+<!-- //↓END OF CART CONTAINER/////// -->
+</div>
 <!-- ↓END OF CONTAINER DIV -->
 </div>
 </body>
