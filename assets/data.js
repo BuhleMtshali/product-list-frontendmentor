@@ -1,4 +1,4 @@
-[
+const data = [
     {
        "image": {
             "thumbnail": "./assets/images/image-waffle-thumbnail.jpg",
@@ -99,3 +99,5 @@
         "price": 6.50
      }
 ]
+
+export default data;
