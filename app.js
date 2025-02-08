@@ -163,49 +163,104 @@ const productItems = data.map((product, index) => {
     }
 
     //funtion for updating quantity
-    function updateQuantity(){
-        let currentQuantity = document.querySelectorAll('.current-quantity');
-        const quantityNumber = document.querySelectorAll('.quantity-number');
-        let totalQuantityPrice = document.querySelectorAll('.total-each');
+    // function updateQuantity(){
+    //     let currentQuantity = document.querySelectorAll('.current-quantity');
+    //     const quantityNumber = document.querySelectorAll('.quantity-number');
+    //     let totalQuantityPrice = document.querySelectorAll('.total-each');
 
-        document.querySelectorAll('.decrement').forEach((quantity) => {
-            quantity.addEventListener('click', () => {
-                currentQuantity.forEach((item) => {
-                    if(item.textContent < 1) {
-                       ('There is currently 1 item in your cart')
-                    }  else {
-                        alert('1 item removed from your cart')
-                        item.textContent = parseInt(item.textContent) - 1;
+    //     document.querySelectorAll('.decrement').forEach((quantity) => {
+    //         quantity.addEventListener('click', () => {
+    //             currentQuantity.forEach((item) => {
+    //                 if(item.textContent < 1) {
+    //                    ('There is currently 1 item in your cart')
+    //                 }  else {
+    //                     alert('1 item removed from your cart')
+    //                     item.textContent = parseInt(item.textContent) - 1;
 
                         //updating the quantity number in the UI    
-                        quantityNumber.forEach((number) => {
-                            number.textContent = item.textContent;
-                        })
+                        // quantityNumber.forEach((number) => {
+                        //     number.textContent = item.textContent;
+                        // })
 
                         //updating the price
-                        totalQuantityPrice.forEach((price) => {
-                            price.textContent = item.textContent;
-                        })
+        //                 totalQuantityPrice.forEach((price) => {
+        //                     price.textContent = item.textContent;
+        //                 })
+        //             }
+        //         })
+        //     })
+        // })
+
+
+    //     document.querySelectorAll('.increment').forEach((btn) => {
+    //             btn.addEventListener('click', () => {
+    //                 currentQuantity.forEach((item) => {
+    //                     console.log(item.textContent)
+    //                     item.textContent = parseInt(item.textContent) + 1;
+
+    //                     //updating the quantity number in the UI    
+    //                     quantityNumber.forEach((number) => {
+    //                         number.textContent = item.textContent;
+    //                     })
+    //                 })
+    //             })
+    //     })
+    // }
+    function updateQuantity() {  //function initializes event listeners for increment (+) and decrement (-) button
+        document.querySelectorAll('.decrement').forEach((button) => { //Selects all elements with the class .decrement
+            button.addEventListener('click', function () {
+                const quantityElement = this.closest('.product')?.querySelector('.current-quantity'); //.closest('.product') or .closest('.checkoutcard') to ensure that only the correct elements get updated
+                const checkoutQuantity = this.closest('.checkoutcard')?.querySelector('.quantity-number'); //this.closest('.checkoutcard') finds the corresponding checkout section (for updating UI)
+                const priceElement = this.closest('.checkoutcard')?.querySelector('.total-each');
+    
+                if (quantityElement) {
+                    let currentQuantity = parseInt(quantityElement.textContent, 10); //parseInt(quantityElement.textContent, 10) converts the quantity from a string to a number.
+                    if (currentQuantity > 1) {
+                        quantityElement.textContent = currentQuantity - 1;
+                        if (checkoutQuantity) checkoutQuantity.textContent = currentQuantity - 1; //Updates both the product page and checkout page quantity displays.
+    
+                        // Updating total price per item
+                        const itemIndex = checkoutArray.findIndex(item => item.name === this.dataset.name); //Finds the item in checkoutArray using findIndex(), matching it by this.dataset.name
+                        if (itemIndex !== -1) {
+                            let unitPrice = checkoutArray[itemIndex].price;
+                            if (priceElement) {
+                                priceElement.textContent = `$${(unitPrice * (currentQuantity - 1)).toFixed(2)}`; //Calculates the new total price: unitPrice * (currentQuantity - 1)
+                            }
+                        }
+    
+                        calculatePrice(); // Update total cart price
+                    } else {
+                        alert('Cannot remove item. Minimum quantity is 1.'); //If the quantity is already 1, display an alert message instead of decreasing further
                     }
-                })
-            })
-        })
-
-
-        document.querySelectorAll('.increment').forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    currentQuantity.forEach((item) => {
-                        console.log(item.textContent)
-                        item.textContent = parseInt(item.textContent) + 1;
-
-                        //updating the quantity number in the UI    
-                        quantityNumber.forEach((number) => {
-                            number.textContent = item.textContent;
-                        })
-                    })
-                })
-        })
+                }
+            });
+        });
+    
+        document.querySelectorAll('.increment').forEach((button) => {
+            button.addEventListener('click', function () {
+                const quantityElement = this.closest('.product')?.querySelector('.current-quantity');
+                const checkoutQuantity = this.closest('.checkoutcard')?.querySelector('.quantity-number');
+                const priceElement = this.closest('.checkoutcard')?.querySelector('.total-each');
+    
+                if (quantityElement) {
+                    let currentQuantity = parseInt(quantityElement.textContent, 10);
+                    quantityElement.textContent = currentQuantity + 1;
+                    if (checkoutQuantity) checkoutQuantity.textContent = currentQuantity + 1;
+    
+                    // Updating total price per item
+                    const itemIndex = checkoutArray.findIndex(item => item.name === this.dataset.name);
+                    if (itemIndex !== -1) {
+                        let unitPrice = checkoutArray[itemIndex].price;
+                        if (priceElement) {
+                            priceElement.textContent = `$${(unitPrice * (currentQuantity + 1)).toFixed(2)}`;
+                        }
+                    }
+    
+                    calculatePrice(); // Update total cart price
+                }
+            });
+        });
     }
-
+    
 
      
