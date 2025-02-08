@@ -49,7 +49,6 @@
                         } else {
 
                         checkoutArray.push(data[index]);
-                        console.log(data[index])
                         //map over the items in the checkout array
                             updateCheckoutDisplay()
 
@@ -67,19 +66,23 @@
 
         //rendering the items in the cart
         function updateCheckoutDisplay(){
+            console.log(checkoutArray)
             if(cheoutRender){
                 cheoutRender.innerHTML = checkoutArray.map((item, index) => {
                   return `
-                            <div class="product" id="${index}">
-                            <img src="${item.image.desktop}" alt="brownie image" id="">
-                            <button class="addBtn" data-index="${index}">
-                            <i class="fa-solid fa-cart-plus"></i>
-                            Add to Cart
-                            </button>
-                            <small class="catergory">${item.category}</small>
-                            <p class="product-name">${item.name}</p>
-                            <p class="price">R ${item.price.toFixed(2)}</p>
-                            </div>  
+                            <div class="checkoutcard">
+                                <p class="product-name">${item.name}</p>
+                                <div class="checkout-info">
+                                <div class="left">
+                                <p class="quantity">1x</p>
+                                <p class="checkout-price">
+                                <span class="price-each">@ $${item.price}</span>
+                                <span class="total-each">$ ${item.price}</span>
+                                </p>
+                                </div>
+                                <i class="fa-regular fa-circle-xmark"></i>
+                                </div>
+                            </div>
                         `
                 }).join("")
             }
@@ -89,7 +92,7 @@
     
         //function to calculate total price
         function calculatePrice(){
-            console.log(checkoutArray);
+            // console.log(checkoutArray);
             const totalPrice = checkoutArray.reduce((total, item) => {
                 return total + item.
                 price;
