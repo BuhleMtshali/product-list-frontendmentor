@@ -56,6 +56,27 @@ body {
    
 }
 
+.active-icons{
+    display: flex;
+    justify-content: space-between;
+    color: var(--btn-bg);
+    font-size: 18px;
+}
+
+.active-icons i{
+    border-radius: 50%;
+    padding: 3px;
+    text-align: center;
+    border: 2px solid var(--btn-bg);
+    cursor: pointer;
+    color: white;
+    cursor: pointer;
+}
+
+/* .active-icons p{
+
+} */
+
 /* Product & Cart Sections */
 .product-container, .cart-container {
     /* flex: 1; */
@@ -147,7 +168,7 @@ body {
     background-color: var(--product-border);
 }
 
-.addBtn i {
+.addBtn .cart {
     margin-right: 5px;
     color: var(--active-btn-bg);
 }

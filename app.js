@@ -18,7 +18,7 @@
                         <div class="product" id="${index}">
                         <img src="${product.image.desktop}" alt="brownie image" id="">
                         <button class="addBtn" data-index="${index}">
-                        <i class="fa-solid fa-cart-plus"></i>
+                        <i class="fa-solid fa-cart-plus cart"></i>
                         Add to Cart
                         </button>
                         <small class="catergory">${product.category}</small>
@@ -40,7 +40,8 @@
             document.querySelectorAll('.addBtn').forEach((button) => {
 
             button.addEventListener('click', function(event) { //EVERYTHING BELOW THIS LINE IS TRIGGERED BY THIS BUTTON
-                            
+            
+                
             let cards = document.querySelectorAll('.product')
                                 
 
@@ -54,26 +55,34 @@
             alert(`${data[index].name} already exists, please adjust the quantity!!!`)
 
             } else {
-
             checkoutArray.push(data[index]);
-            //updating the UI
             
+            if(checkoutArray.length > 0) {
+                button.style.backgroundColor = "var(--active-btn-bg)";
+                button.style.padding = "8px 12px"
+                button.style.color = "var(--btn-bg)"
+                button.innerHTML = `<div class="active-icons">
+                                    <i class="fa-solid fa-minus"></i>
+                                    <p class="current-quantity">1</p>
+                                    <i class="fa-solid fa-plus"></i>
+                                    </div>
+                                    `
+                }
+
+
+            //if statement for changing the parent div and calls the function
             cards.forEach((item) => {
                 if(item.id === index){
                     updateUi(item)
             }
         })
-            // updateUi(cards, index)
-
-            //map over the items in the checkout array
-            
+            //function for displaying the checkout array
             updateCheckoutDisplay()
 
             // function to calculate the price
             calculatePrice()
 
-            //update the UI of the original state
-            // updateUi()
+           
                     }        
             })
 
@@ -82,20 +91,24 @@
         }  else {
             console.error("Element with ID 'product-render' not found");
         }
-            function updateUi(product) {
+            
+        //updating the ui of the old array if an item is added to the cart
+        function updateUi(product) {
                 console.log(product)
+                product.style.border = "2px solid var(--active-btn-bg)"
+            
             }
 
-            //rendering the items in the cart and updating the UI
-            function updateCheckoutDisplay(){
-            
-            bottomContainer.style.display = 'block' //if something is added to the array the checkout btn must appear
+        //rendering the items in the cart and updating the UI
+        function updateCheckoutDisplay(){
+        
+        bottomContainer.style.display = 'block' //if something is added to the array the checkout btn must appear
 
-            checkoutItemsLength.textContent = checkoutArray.length //updating the length of the array
+        checkoutItemsLength.textContent = checkoutArray.length //updating the length of the array
 
-            console.log(checkoutArray)
+        console.log(checkoutArray)
 
-            if(cheoutRender){
+        if(cheoutRender){
 
                 cheoutRender.innerHTML = checkoutArray.map((item, index) => {
 
@@ -132,17 +145,4 @@
             finalTotal.textContent = `$${totalPrice}`
         }
 
-    // document.querySelectorAll('.addBtn').forEach((button, index) => {
-    //     button.addEventListener('click', function() {
-    //         button.dataset.id = index; //storing the index in a dataset
-    //         this.style.backgroundColor = this.style.backgroundColor === "blue" ? "var(--btn-bg)" : "blue"; //toggling the style
-    //         console.log(this)
-    //     })
-    // })
-
-    // document.querySelectorAll('.product').forEach((card, index) => {
-    //     card.addEventListener('click', function() {
-    //         checkoutArray.push(this)
-    //         console.log(checkoutArray)
-    //     })
-    // })
+    
