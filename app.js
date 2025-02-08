@@ -9,7 +9,7 @@ const cartContainer = document.getElementById('cart-container')
 const bottomContainer = document.getElementById('bottom-button-container')
 const checkoutItemsLength = document.getElementById('items-cart');
 let finalTotal = document.getElementById('total');
-const quantityElement = document.querySelectorAll('.current-quantity')
+
 
 const checkoutArray = [];
 
@@ -57,27 +57,9 @@ const productItems = data.map((product, index) => {
 
 
                     // checks if the array has the data value
-                    if(existingItem){
+                    if(!existingItem){
 
-                        decrementBtn.forEach((button) => {
-                            button.addEventListener('click', function() {
-                            console.log("decrement button click")
-                            console.log(quantityElement)
-                        })
-                    })
-
-
-                    incrementBtn.forEach((btn) => {
-                        btn.addEventListener('click', function() {
-                            console.log("increment btn clicked")
-                        })
-                    })
-                   
-            
-
-             } else {
-                   
-                     //if it doesn't exist push the to the checkout array
+                         //if it doesn't exist push the to the checkout array
                      checkoutArray.push(data[index]);
                 
                      if(checkoutArray.length > 0) {
@@ -101,6 +83,11 @@ const productItems = data.map((product, index) => {
 
 
                 }
+                   
+            
+        
+                   
+                    
     })
         //function for displaying the checkout array
         updateCheckoutDisplay()
@@ -108,6 +95,8 @@ const productItems = data.map((product, index) => {
         // function to calculate the price
         calculatePrice()
 
+        //update current quantity
+        updateQuantity()
        
                 }        
         })
@@ -156,6 +145,8 @@ const productItems = data.map((product, index) => {
                    ` 
             }).join("")
         }
+
+       
     }
 
 
@@ -171,3 +162,50 @@ const productItems = data.map((product, index) => {
         finalTotal.textContent = `$${totalPrice}`
     }
 
+    //funtion for updating quantity
+    function updateQuantity(){
+        let currentQuantity = document.querySelectorAll('.current-quantity');
+        const quantityNumber = document.querySelectorAll('.quantity-number');
+        let totalQuantityPrice = document.querySelectorAll('.total-each');
+
+        document.querySelectorAll('.decrement').forEach((quantity) => {
+            quantity.addEventListener('click', () => {
+                currentQuantity.forEach((item) => {
+                    if(item.textContent < 1) {
+                       ('There is currently 1 item in your cart')
+                    }  else {
+                        alert('1 item removed from your cart')
+                        item.textContent = parseInt(item.textContent) - 1;
+
+                        //updating the quantity number in the UI    
+                        quantityNumber.forEach((number) => {
+                            number.textContent = item.textContent;
+                        })
+
+                        //updating the price
+                        totalQuantityPrice.forEach((price) => {
+                            price.textContent = item.textContent;
+                        })
+                    }
+                })
+            })
+        })
+
+
+        document.querySelectorAll('.increment').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    currentQuantity.forEach((item) => {
+                        console.log(item.textContent)
+                        item.textContent = parseInt(item.textContent) + 1;
+
+                        //updating the quantity number in the UI    
+                        quantityNumber.forEach((number) => {
+                            number.textContent = item.textContent;
+                        })
+                    })
+                })
+        })
+    }
+
+
+     
