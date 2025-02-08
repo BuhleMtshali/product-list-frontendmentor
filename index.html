@@ -31,11 +31,15 @@
 <!-- ↑ END OF PRODUCT RENDER -->
 </div>
 <!-- ↑↑END OF PRODUCT CART↑↑ -->
-<div class="cart-container">
-    <h1>Your Cart (<span id="items-cart">0</span>)</h1>
+<div class="cart-container" id="cart-container">
+                <h1>Your Cart (<span id="items-cart">0</span>)</h1>
                 <div class="cart-render" id="checkout-render">
-                <!-- <img src="assets/images/empty-cart-bg.svg" alt="placeholder image"> -->
-                <div class="checkoutcard">
+                <div class="placeholder-div">
+                    <img src="assets/images/empty-cart-bg.svg" alt="placeholder image">
+                    <p class="placeholder-text">Your items will appear here</p>
+                    </div>
+                  
+                    <!-- <div class="checkoutcard">
                     <p class="product-name">Salted Caramel Brownie</p>
                     <div class="checkout-info">
                     <div class="left">
@@ -47,13 +51,13 @@
                     </div>
                     <i class="fa-regular fa-circle-xmark"></i>
                     </div>
+                    </div> -->
+                    <!-- end of checkout card -->
                 </div>
-                <!-- end of checkout card -->
-                </div>
-                <div class="bottom-button-container">
+                    <div class="bottom-button-container" id="bottom-button-container">
                     <div class="total-cost">
                     <p class="totalOrder">Order total:</p>
-                    <h2>$46.50</h2>
+                    <h2 class="total-price" id="total">$46.50</h2>
                     <!-- ↓ END OF TOTAL COST -->
                     </div>
                      <!-- ↑ END OF TOTAL COST DIV --> 
