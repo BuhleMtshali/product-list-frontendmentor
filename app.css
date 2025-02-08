@@ -38,6 +38,7 @@ body {
     justify-content: space-between;
     gap: 20px;
     padding: 20px;
+    
 }
 
 .product-container h1{
@@ -212,10 +213,11 @@ body {
     cursor: pointer;
 }
 
-.total-cost {
+.total-cost, .carbon-div {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 30px 0 0 0;
 }
 
 .totalOrder {
@@ -224,6 +226,32 @@ body {
 }
 .total-cost h2{
     color: var(--heading-color);
+}
+
+.checkout-div{
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-btn{
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 27px;
+    font-size: 18px;
+    background-color: var(--active-btn-bg);
+    border: none;
+    color: var(--btn-bg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.checkout-btn:hover{
+    background-color: var(--btn-bg);
+    color: var(--active-btn-bg);
+    border: 2px solid var(--active-btn-bg);
 }
 
 
