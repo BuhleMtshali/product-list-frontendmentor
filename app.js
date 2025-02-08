@@ -8,7 +8,8 @@ const cheoutRender = document.getElementById('checkout-render')
 const cartContainer = document.getElementById('cart-container')
 const bottomContainer = document.getElementById('bottom-button-container')
 const checkoutItemsLength = document.getElementById('items-cart');
-let finalTotal = document.getElementById('total')
+let finalTotal = document.getElementById('total');
+const quantityElement = document.querySelectorAll('.current-quantity')
 
 const checkoutArray = [];
 
@@ -50,13 +51,18 @@ const productItems = data.map((product, index) => {
                     event.stopPropagation() //stops from triggering parent div click
                     
                     const index = this.getAttribute('data-index'); //retrieves the value of the data-index attribute from the element that was clicked
-            
-                // checks if the array has the data value
-                if(checkoutArray.includes(data[index])){
 
-                    decrementBtn.forEach((button) => {
-                        button.addEventListener('click', function() {
+                     // Check if item is already in the cart
+                    const existingItem = checkoutArray.includes((data[index]));
+
+
+                    // checks if the array has the data value
+                    if(existingItem){
+
+                        decrementBtn.forEach((button) => {
+                            button.addEventListener('click', function() {
                             console.log("decrement button click")
+                            console.log(quantityElement)
                         })
                     })
 
@@ -81,9 +87,9 @@ const productItems = data.map((product, index) => {
                      button.style.color = "var(--btn-bg)"
                      button.innerHTML = `
                                  <div class="active-icons">
-                                 <i class="fa-solid fa-minus increment"></i>
+                                 <i class="fa-solid fa-minus decrement"></i>
                                  <p class="current-quantity">1</p>
-                                 <i class="fa-solid fa-plus decrement"></i>
+                                 <i class="fa-solid fa-plus increment"></i>
                                  </div>
                                 `
                                  
@@ -137,7 +143,8 @@ const productItems = data.map((product, index) => {
                     <p class="product-name">${item.name}</p>
                     <div class="checkout-info">
                     <div class="left">
-                    <p class="quantity">1x</p>
+                    <p class="quantity"><span class="quantity-number">1</span>x
+                    </p>
                     <p class="checkout-price">
                     <span class="price-each">@ $${item.price}</span>
                     <span class="total-each">$${item.price}</span>
