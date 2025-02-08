@@ -23,7 +23,7 @@
                         </button>
                         <small class="catergory">${product.category}</small>
                         <p class="product-name">${product.name}</p>
-                        <p class="price">R ${product.price.toFixed(2)}</p>
+                        <p class="price">$ ${product.price.toFixed(2)}</p>
                         </div>  
                         `
         }).join("")
@@ -57,9 +57,11 @@
                    
 
                 } else {
+                    //if it doesn't exist push the to the checkout array
                     checkoutArray.push(data[index]);
             
                         if(checkoutArray.length > 0) {
+                        // change the styling of the button if array.length is greater than 0
                         button.style.backgroundColor = "var(--active-btn-bg)";
                         button.style.padding = "8px 12px"
                         button.style.color = "var(--btn-bg)"

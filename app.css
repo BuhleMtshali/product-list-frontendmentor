@@ -57,10 +57,11 @@ body {
 }
 
 .active-icons{
-    display: flex;
+    display: none;
     justify-content: space-between;
     color: var(--btn-bg);
     font-size: 18px;
+    background-color: chartreuse;
 }
 
 .active-icons i{
@@ -71,7 +72,40 @@ body {
     cursor: pointer;
     color: white;
     cursor: pointer;
+   
 }
+
+.initial-icons{
+    background-color: cornflowerblue;
+    
+}
+
+/* Add to Cart Button */
+.product-render .product button{
+    width: 70%;
+    margin: 0 auto;
+    padding: 11px 18px;
+    border-radius: 19px;
+    font-weight: 600;
+    font-size: 15px;
+    border: 2px solid var(--btn-border);
+    position: absolute;
+    bottom: 120px;
+    left: 49px;
+    background-color: var(--active-btn-bg);
+    color: var(--btn-color);
+    cursor: pointer;
+}
+
+.addBtn:hover {
+    background-color: var(--product-border);
+}
+
+.addBtn .cart {
+    margin-right: 5px;
+    color: var(--active-btn-bg);
+}
+
 
 /* .active-icons p{
 
@@ -147,31 +181,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* Add to Cart Button */
-.product-render .product button{
-    width: 70%;
-    margin: 0 auto;
-    padding: 11px 18px;
-    border-radius: 19px;
-    font-weight: 600;
-    font-size: 15px;
-    border: 2px solid var(--btn-border);
-    position: absolute;
-    bottom: 120px;
-    left: 49px;
-    background-color: var(--btn-bg);
-    color: var(--btn-color);
-    cursor: pointer;
-}
 
-.addBtn:hover {
-    background-color: var(--product-border);
-}
-
-.addBtn .cart {
-    margin-right: 5px;
-    color: var(--active-btn-bg);
-}
 
 .cart-container{
     flex: 0;
