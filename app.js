@@ -41,40 +41,41 @@
 
             button.addEventListener('click', function(event) { //EVERYTHING BELOW THIS LINE IS TRIGGERED BY THIS BUTTON
             
+            //increment & decrement buttons 
+            let incrementBtn = document.querySelectorAll('.increment');
+            let decrementBtn = document.querySelectorAll('.decrement');
                 
             let cards = document.querySelectorAll('.product')
-                                
-
+        
             event.stopPropagation() //stops from triggering parent div click
             
             const index = this.getAttribute('data-index'); //retrieves the value of the data-index attribute from the element that was clicked
-        
+           
             // checks if the array has the data value
-            if(checkoutArray.includes(data[index])){
+            if(checkoutArray.some(item => item.id === data[index].id)){
+                    console.log(incrementBtn)
+                   
 
-            alert(`${data[index].name} already exists, please adjust the quantity!!!`)
-
-            } else {
-            checkoutArray.push(data[index]);
+                } else {
+                    checkoutArray.push(data[index]);
             
-            if(checkoutArray.length > 0) {
-                button.style.backgroundColor = "var(--active-btn-bg)";
-                button.style.padding = "8px 12px"
-                button.style.color = "var(--btn-bg)"
-                button.innerHTML = `<div class="active-icons">
-                                    <i class="fa-solid fa-minus"></i>
+                        if(checkoutArray.length > 0) {
+                        button.style.backgroundColor = "var(--active-btn-bg)";
+                        button.style.padding = "8px 12px"
+                        button.style.color = "var(--btn-bg)"
+                        button.innerHTML = `<div class="active-icons">
+                                    <i class="fa-solid fa-minus increment"></i>
                                     <p class="current-quantity">1</p>
-                                    <i class="fa-solid fa-plus"></i>
+                                    <i class="fa-solid fa-plus decrement"></i>
                                     </div>
                                     `
-                }
-
-
-            //if statement for changing the parent div and calls the function
-            cards.forEach((item) => {
-                if(item.id === index){
-                    updateUi(item)
-            }
+                        }
+               
+                    //if statement for changing the parent div and calls the function
+                        cards.forEach((item) => {
+                        if(item.id === index){
+                            updateUi(item)
+                    }
         })
             //function for displaying the checkout array
             updateCheckoutDisplay()
@@ -94,7 +95,7 @@
             
         //updating the ui of the old array if an item is added to the cart
         function updateUi(product) {
-                console.log(product)
+                // console.log(product)
                 product.style.border = "2px solid var(--active-btn-bg)"
             
             }
@@ -135,10 +136,9 @@
     
         //function to calculate total price
         function calculatePrice(){
-            // console.log(checkoutArray);
+
             const totalPrice = checkoutArray.reduce((total, item) => {
-                return total + item.
-                price;
+                return total + item.price;
             }, 0)
 
             console.log(totalPrice)
