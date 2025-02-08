@@ -4,8 +4,10 @@
 
     //defining the variables
     const productContainer = document.getElementById('product-render');
+    const cheoutRender = document.getElementById('checkout-render')
 
     const checkoutArray = [];
+
 
     //rendering them out
     const productItems = data.map((product, index) => {
@@ -19,10 +21,9 @@
                         </button>
                         <small class="catergory">${product.category}</small>
                         <p class="product-name">${product.name}</p>
-                        <p class="price">R ${((product.price) * 18.40).toFixed(2)}</p>
+                        <p class="price">R ${product.price.toFixed(2)}</p>
                         </div>  
                         `
-                        handleClick(product); 
         }).join("")
 
         //checking if container exists
@@ -36,32 +37,66 @@
 
                 button.addEventListener('click', function(event) {
 
-                event.stopPropagation() //stops from triggering parent div click
+                // event.stopPropagation() //stops from triggering parent div click
 
                 const index = this.getAttribute('data-index');
 
-                if(checkoutArray.includes(data[index])){
+            // checks if the array has the data value
+                    if(checkoutArray.includes(data[index])){
 
-                    alert(`${data[index].name} already exists, please adjust the quantity!!!`)
+                        alert(`${data[index].name} already exists, please adjust the quantity!!!`)
 
-                } else {
+                        } else {
 
-                    checkoutArray.push(data[index]);
-                    
-                    console.log(checkoutArray)
-                }
-                  
+                        checkoutArray.push(data[index]);
+                        console.log(data[index])
+                        //map over the items in the checkout array
+                            updateCheckoutDisplay()
+
+                        // function to calculate the price
+                            calculatePrice()
+                    }        
             })
 
         })
-        
-
-
 
         }  else {
         console.error("Element with ID 'product-render' not found");
     }
 
+
+        //rendering the items in the cart
+        function updateCheckoutDisplay(){
+            if(cheoutRender){
+                cheoutRender.innerHTML = checkoutArray.map((item, index) => {
+                  return `
+                            <div class="product" id="${index}">
+                            <img src="${item.image.desktop}" alt="brownie image" id="">
+                            <button class="addBtn" data-index="${index}">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            Add to Cart
+                            </button>
+                            <small class="catergory">${item.category}</small>
+                            <p class="product-name">${item.name}</p>
+                            <p class="price">R ${item.price.toFixed(2)}</p>
+                            </div>  
+                        `
+                }).join("")
+            }
+        }
+
+
+    
+        //function to calculate total price
+        function calculatePrice(){
+            console.log(checkoutArray);
+            const totalPrice = checkoutArray.reduce((total, item) => {
+                return total + item.
+                price;
+            }, 0)
+
+            console.log(totalPrice)
+        }
 
     // document.querySelectorAll('.addBtn').forEach((button, index) => {
     //     button.addEventListener('click', function() {
