@@ -12,10 +12,8 @@
 
     const checkoutArray = [];
 
-
     //rendering them out
     const productItems = data.map((product, index) => {
-
             return    `
                         <div class="product" id="${index}">
                         <img src="${product.image.desktop}" alt="brownie image" id="">
@@ -29,49 +27,68 @@
                         </div>  
                         `
         }).join("")
-
+        
         //checking if container exists
 
         if (productContainer) {
 
-                            productContainer.innerHTML = productItems;
+            productContainer.innerHTML = productItems;
 
-                            // ADDING AN EVENT LISTENER to the product card
-                            document.querySelectorAll('.addBtn').forEach((button) => {
-
-                            button.addEventListener('click', function(event) { //EVERYTHING BELOW THIS LINE IS TRIGGERED BY THIS BUTTON
-
-                            event.stopPropagation() //stops from triggering parent div click
-
-                            const index = this.getAttribute('data-index'); //retrieves the value of the data-index attribute from the element that was clicked
-                            // checks if the array has the data value
-                            if(checkoutArray.includes(data[index])){
-
-                            alert(`${data[index].name} already exists, please adjust the quantity!!!`)
-
-                            } else {
-
-                            checkoutArray.push(data[index]);
-
-                            //map over the items in the checkout array
                             
-                            updateCheckoutDisplay()
 
-                            // function to calculate the price
-                            calculatePrice()
+            // ADDING AN EVENT LISTENER to the product card
+            document.querySelectorAll('.addBtn').forEach((button) => {
+
+            button.addEventListener('click', function(event) { //EVERYTHING BELOW THIS LINE IS TRIGGERED BY THIS BUTTON
+                            
+            let cards = document.querySelectorAll('.product')
+                                
+
+            event.stopPropagation() //stops from triggering parent div click
+            
+            const index = this.getAttribute('data-index'); //retrieves the value of the data-index attribute from the element that was clicked
+        
+            // checks if the array has the data value
+            if(checkoutArray.includes(data[index])){
+
+            alert(`${data[index].name} already exists, please adjust the quantity!!!`)
+
+            } else {
+
+            checkoutArray.push(data[index]);
+            //updating the UI
+            
+            cards.forEach((item) => {
+                if(item.id === index){
+                    updateUi(item)
+            }
+        })
+            // updateUi(cards, index)
+
+            //map over the items in the checkout array
+            
+            updateCheckoutDisplay()
+
+            // function to calculate the price
+            calculatePrice()
+
+            //update the UI of the original state
+            // updateUi()
                     }        
             })
 
         })
 
         }  else {
-        console.error("Element with ID 'product-render' not found");
-    }
+            console.error("Element with ID 'product-render' not found");
+        }
+            function updateUi(product) {
+                console.log(product)
+            }
 
-
-        //rendering the items in the cart and updating the UI
-        function updateCheckoutDisplay(){
-
+            //rendering the items in the cart and updating the UI
+            function updateCheckoutDisplay(){
+            
             bottomContainer.style.display = 'block' //if something is added to the array the checkout btn must appear
 
             checkoutItemsLength.textContent = checkoutArray.length //updating the length of the array
